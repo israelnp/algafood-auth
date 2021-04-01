@@ -28,22 +28,30 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
                 .inMemory()
-                .withClient("algafood-web")
-                .secret(passwordEncoder.encode("web123"))
-                .authorizedGrantTypes("password", "refresh_token")
-                .scopes("write", "read")
-                .accessTokenValiditySeconds(60 * 60 * 6) // 6 horas (padrão é 12 horas)
-                .refreshTokenValiditySeconds(60 * 24 * 60 * 60) // 60 dias
-                .and()
-                .withClient("faturamento")
-                .secret(passwordEncoder.encode("faturamento123"))
-                .authorizedGrantTypes("client_credentials")
-                .scopes("write", "read")
+                    .withClient("algafood-web")
+                    .secret(passwordEncoder.encode("web123"))
+                    .authorizedGrantTypes("password", "refresh_token")
+                    .scopes("write", "read")
+                    .accessTokenValiditySeconds(6 * 60 * 60)// 6 horas
+                    .refreshTokenValiditySeconds(60 * 24 * 60 * 60) // 60 dias
 
                 .and()
-                .withClient("checktoken")
-                .secret(passwordEncoder.encode("check123"));
-    }
+                    .withClient("foodnanalytics")
+                    .secret(passwordEncoder.encode("food123"))
+                    .authorizedGrantTypes("authorization_code")
+                    .scopes("write", "read")
+                    .redirectUris("http://aplicacao-cliente")
+
+                .and()
+                    .withClient("faturamento")
+                    .secret(passwordEncoder.encode("faturamento123"))
+                    .authorizedGrantTypes("client_credentials")
+                    .scopes("write", "read")
+
+                .and()
+                    .withClient("checktoken")
+                    .secret(passwordEncoder.encode("check123"));
+        }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
