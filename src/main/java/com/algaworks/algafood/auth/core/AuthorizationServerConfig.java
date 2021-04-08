@@ -1,5 +1,6 @@
 package com.algaworks.algafood.auth.core;
 
+
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
