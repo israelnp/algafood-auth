@@ -1,5 +1,6 @@
 package com.algaworks.algafood.auth.core;
 
+
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ import com.algaworks.algafood.auth.domain.UsuarioRepository;
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
 
-    @Autowired(required = false)
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Transactional(readOnly = true)
